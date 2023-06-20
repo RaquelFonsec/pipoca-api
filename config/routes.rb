@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  # Rotas Devise e raiz
   devise_for :users
   root to: "pages#home"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  # Rotas da API
+  patch '/api/v1/podcasts/:id', to: 'api/v1/podcasts#update'
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :podcasts, only: [:index, :show, :update, :create,:destroy]
+    end
+  end
 end

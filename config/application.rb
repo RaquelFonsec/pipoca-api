@@ -25,3 +25,21 @@ module PipocaApi
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
+# config/application.rb
+
+module YourAppName
+  class Application < Rails::Application
+    # ...
+
+    # Permitir todos os hosts para o ambiente de desenvolvimento
+    config.hosts.clear if Rails.env.development?
+
+    # Permitir todos os hosts para o ambiente de teste
+    config.hosts.clear if Rails.env.test?
+
+    # Adicionar o host ":" para todos os outros ambientes
+    config.hosts << ":"
+
+    # ...
+  end
+end
